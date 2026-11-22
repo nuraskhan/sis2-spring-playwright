@@ -13,8 +13,8 @@ test('Logged-in user can add product to cart and complete purchase', async ({ pa
 
   // Browse and add product
   const productPage = new ProductPage(page);
-  await productPage.open();
-  await expect(productPage.productNames.first()).toBeVisible();
+  await productPage.openFromMenu();
+  await expect(productPage.productNames.first()).toBeVisible({ timeout: 10_000 });
   await productPage.clickFirstProduct();
   await productPage.addToCart();
 

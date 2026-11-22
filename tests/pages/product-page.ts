@@ -11,6 +11,14 @@ export class ProductPage {
     await this.page.goto('/');
   }
 
+  /**
+   * Goes to the product list through the navigation bar, the way a signed-in
+   * user does. This is client-side routing, so it does not reload the document.
+   */
+  async openFromMenu() {
+    await this.page.getByTestId('nav-home').click();
+  }
+
   async clickFirstProduct() {
     await this.productNames.first().click();
   }

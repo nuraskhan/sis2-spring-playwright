@@ -1,19 +1,16 @@
 import { test, expect } from './fixtures';
 import { CartPage } from './pages/cart-page';
 import { CheckoutPage } from './pages/checkout-page';
-import { LoginPage } from './pages/login-page';
 import { ProductPage } from './pages/product-page';
 
-test('Logged-in user can add product to cart and complete purchase', async ({ page, customer }) => {
-  // Login
-  const loginPage = new LoginPage(page);
-  await loginPage.open();
-  await loginPage.signIn(customer.email, customer.password);
-  await expect(page).toHaveURL(/\/account/, { timeout: 10_000 });
+test('Logged-in user can add product to cart and complete purchase', async ({ page, signedInCustomer }) => {
+  // The customer is signed in through the API (see fixtures.ts); from here the
+  // whole flow is one page load followed by in-app navigation.
+  const productPage = new ProductPage(page);
+  await productPage.open();
+  await expect(page.getByTestId('nav-menu')).toContainText(signedInCustomer.firstName);
 
   // Browse and add product
-  const productPage = new ProductPage(page);
-  await productPage.openFromMenu();
   await expect(productPage.productNames.first()).toBeVisible({ timeout: 10_000 });
   await productPage.clickFirstProduct();
   await productPage.addToCart();

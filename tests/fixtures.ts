@@ -11,6 +11,13 @@ type Fixtures = {
    * (and never lock) the same account.
    */
   customer: UserData;
+  /**
+   * The same customer, already signed in when the first page opens.
+   * The token comes from the login API and is placed where the app keeps it
+   * (localStorage `auth-token`), so tests that are not about the login form do
+   * not have to go through it. The login form itself is covered by login.spec.ts.
+   */
+  signedInCustomer: UserData;
 };
 
 export const test = base.extend<Fixtures>({
@@ -37,6 +44,17 @@ export const test = base.extend<Fixtures>({
     });
     expect(response.status(), `register ${user.email}: ${await response.text()}`).toBe(201);
     await use(user);
+  },
+
+  signedInCustomer: async ({ customer, request, page }, use) => {
+    const response = await request.post(`${API_URL}/users/login`, {
+      headers: { Accept: 'application/json' },
+      data: { email: customer.email, password: customer.password },
+    });
+    expect(response.status(), `login ${customer.email}: ${await response.text()}`).toBe(200);
+    const { access_token: token } = await response.json();
+    await page.addInitScript((value) => window.localStorage.setItem('auth-token', value), token);
+    await use(customer);
   },
 });
 

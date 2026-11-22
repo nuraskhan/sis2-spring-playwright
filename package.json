@@ -1,0 +1,21 @@
+{
+  "name": "sis2-playwright",
+  "version": "2.0.0",
+  "private": true,
+  "description": "E2E tests for Practice Software Testing Toolshop with Playwright Test and a GitHub Actions pipeline",
+  "scripts": {
+    "test": "playwright test",
+    "test:ci": "cross-env CI=true playwright test",
+    "report": "playwright show-report",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.1",
+    "@types/node": "22.20.5",
+    "cross-env": "10.1.0",
+    "typescript": "7.0.2"
+  }
+}

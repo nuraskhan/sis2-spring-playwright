@@ -1,5 +1,9 @@
 # Prompts Used for AI Assistance
 
+> This file describes the original SIS 2 work (October 2026), when the suite was written in Java.
+> The Java code has since been replaced by a TypeScript suite; see `AI_USAGE.md` for the CI
+> pipeline assignment.
+
 ## AI Tool
 **Claude Opus 4.6 (1M context)** — used through Claude Code CLI (terminal-based tool by Anthropic)
 

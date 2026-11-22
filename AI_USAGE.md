@@ -11,7 +11,7 @@ documented in `Prompt.md` and `Review.md`.
 - **Date:** 2026-11-22
 - **Mode of work:** the agent read the repository and the assignment guide, proposed a plan for
   each part, and made the changes after I approved them. Every step is a separate git commit.
-  Pushing was done only on my explicit instruction.
+  The agent was told not to push; commits stay local until I push them.
 
 ## Prompts
 
@@ -95,6 +95,7 @@ machine, so the YAML is exercised only on GitHub.
 
 ## Limits of the AI's contribution
 
-- The timing numbers in the README come from GitHub Actions runs, not from the AI.
-- The agent cannot see the GitHub Actions UI; run links, the cache-restore log line and the
-  artefact list were checked by me.
+- The timing numbers in the README must come from real GitHub Actions runs. Until those runs
+  exist the table says "pending"; the agent did not invent figures.
+- The agent cannot see the GitHub Actions UI. Run links, the cache-restore log line and the
+  artefact list have to be checked by me on GitHub.

@@ -20,7 +20,7 @@ name still says "spring"; the Java/Spring suite was removed on 2026-11-22.
   place the model is named, because the assignment requires it.
 - Do not add secrets to the repo.
 - Every AI-assisted step must be recorded in the AI disclosure markdown (model, prompts, what was
-  corrected). `Prompt.md` and `Review.md` currently describe only the earlier SIS 2 work.
+  corrected) in `AI_USAGE.md`. `Prompt.md` and `Review.md` describe only the earlier Java work.
 - Analyse and present a plan before acting on each section of the assignment guide; wait for the
   user's go-ahead.
 
@@ -89,13 +89,15 @@ restored, a 1-shard run and a 4-shard run for the timing table (median of 2-3
 | Guide step | Status |
 | --- | --- |
 | 1. CI configuration (`playwright.config.ts`, `merge.config.ts`) | done; suite ported from Java first |
-| 2. Run in CI mode locally (`forbidOnly` check, local shards + merge) | plain and `CI=true` runs pass 8/8; `test.only` check and shard merge not done yet |
-| 3. GitHub Actions workflow | not started |
+| 2. Run in CI mode locally (`forbidOnly` check, local shards + merge) | done: 8/8 pass, `test.only` fails the CI run, 2 shards merge into one report with 8 cases |
+| 3. GitHub Actions workflow | written, not yet run on GitHub (needs a push) |
 | 4. Docker / `act` | not possible on this machine (neither is installed) |
-| 5. Timing table, badge, README CI section | not started |
-| AI disclosure file for this assignment | not started |
+| 5. Timing table, badge, README CI section | README written; timing rows and conclusion say "pending" until real runs exist |
+| AI disclosure file for this assignment | `AI_USAGE.md`; the model line is left for the user to fill in |
 
-`README.md` and `Description.md` still describe the removed Java suite and must be rewritten.
+The workflow's `workflow_dispatch` has a `shards` input (`4` default, `1` for the baseline), so
+the before/after timing needs no temporary edit of the matrix. Push and PR runs always use 4.
+Manual runs only become available once the workflow file is on the default branch.
 
 ## Decisions already made
 

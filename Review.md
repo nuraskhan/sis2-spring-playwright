@@ -1,5 +1,8 @@
 # Review of AI Results
 
+> This review covers the original Java version of the suite (October 2026). For the CI pipeline
+> assignment and the TypeScript port see `AI_USAGE.md`.
+
 ## What the AI Generated
 
 Claude Opus 4.6 generated a complete Spring Boot + Playwright Java project:

@@ -75,13 +75,19 @@ To open a trace, download a `test-results-N` artefact and run
 
 The baseline is the same workflow started manually with the `shards` input set to `1`; the
 sharded figure is the default 4-shard run.
-
-| Configuration | Total run time | Run tests step (slowest shard) | Run |
+| Configuration | Total run time | Slowest shard job | Run |
 | --- | --- | --- | --- |
-| 1 job, no sharding | _pending first GitHub run_ | _pending_ | _pending_ |
-| 4 shards + merge | _pending first GitHub run_ | _pending_ | _pending_ |
+| 1 job, no sharding | BASE_TOTAL | BASE_JOB | [run](BASE_URL) |
+| 4 shards + merge | 1m 19s | 35s (+ 22s merge) | [run #6](https://github.com/nuraskhan/sis2-spring-playwright/commit/359fa5706a565a326e1f6debe2f1b7d01f55feba/checks) |
 
-Conclusion: _to be written from the measured numbers._
+Times are whole GitHub Actions jobs, including runner start, `npm ci` and browser install, not
+only the test step.
+
+Conclusion: with only 8 tests (about 11 s of actual test time), each job spends most of its time
+on setup: starting the runner, restoring the npm cache and installing Chromium. Sharding splits
+only the test time, while every shard repeats the setup and the merge job adds about 20 s more.
+For a suite this small, 4 shards are therefore not faster than one job; sharding starts to pay
+off only when the test time is much larger than the setup time.
 
 ### Running in CI mode locally
 

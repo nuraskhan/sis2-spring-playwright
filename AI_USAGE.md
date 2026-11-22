@@ -7,7 +7,7 @@ documented in `Prompt.md` and `Review.md`.
 
 - **Tool:** Claude Code (Anthropic's command-line coding agent), run in a terminal session on
   Windows 11 with access to the cloned repository.
-- **Model:** _to be filled in by the author_
+- **Model:** Fable 5.2
 - **Date:** 2026-11-22
 - **Mode of work:** the agent read the repository and the assignment guide, proposed a plan for
   each part, and made the changes after I approved them. Every step is a separate git commit.
